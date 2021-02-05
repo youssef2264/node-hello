@@ -1,22 +1,10 @@
 pipeline {
-    agent any
-    tools { 
-        npm 'npm' 
-    }
+    agent { docker { image 'node:14-alpine' } }
     stages {
-        stage ('Initialize') {
+        stage('build') {
             steps {
-                sh '''
-                    echo "PATH = ${PATH}"
-                    echo "M2_HOME = ${M2_HOME}"
-                ''' 
+                sh 'npm --version'
             }
         }
-
-        stage ('Build') {
-            steps {
-                sh 'npm clean package'
-            }
-        }
-    } 
+    }
 }
