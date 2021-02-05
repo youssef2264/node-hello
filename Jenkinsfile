@@ -1,15 +1,22 @@
 pipeline {
-    agent {
-        docker {
-            image 'node:6-alpine' 
-            args '-p 3000:3000' 
-        }
+    agent any
+    tools { 
+        npm 'npm' 
     }
     stages {
-        stage('Build') { 
+        stage ('Initialize') {
             steps {
-                sh 'npm install' 
+                sh '''
+                    echo "PATH = ${PATH}"
+                    echo "M2_HOME = ${M2_HOME}"
+                ''' 
             }
         }
-    }
+
+        stage ('Build') {
+            steps {
+                sh 'npm clean package'
+            }
+        }
+    } 
 }
