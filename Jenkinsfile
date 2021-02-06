@@ -1,10 +1,20 @@
 pipeline {
-    agent { any { image 'node:14-alpine' } }
+    agent any
+    tools { 
+        npm 'npm' 
+    }
     stages {
-        stage('build') {
+        stage ('Initialize') {
             steps {
-                sh 'npm install'
+                sh '''
+                    echo "PATH = ${PATH}"
+                    echo "M2_HOME = ${M2_HOME}"
+                ''' 
             }
         }
-    }
-}
+	    
+	  stage ('Build') {
+            steps {
+                sh 'npm clean package'
+            }
+        }
