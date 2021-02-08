@@ -6,7 +6,7 @@ node {
    }
    stage('Build') {
       // Run the npm build
-      
+         bat "npm install"
          bat "npm build"
       }
    }
