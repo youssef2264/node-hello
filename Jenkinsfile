@@ -1,22 +1,12 @@
-pipeline {
-    agent any
-    tools { 
-        nodejs 'npm' 
-    }
-    stages {
-        stage ('Initialize') {
-            steps {
-                sh '''
-                    echo "PATH = ${PATH}"
-                    echo "M2_HOME = ${M2_HOME}"
-                ''' 
-            }
-        }
-	    
-	  stage ('Build') {
-            steps {
-                sh 'npm clean package'
-            }
-        }
-    }
-}
+node {
+   stage('Preparation') { // for display purposes
+      // Get some code from a GitHub repository
+      git 'https://github.com/youssef2264/webapp.git'
+
+   }
+   stage('Build') {
+      // Run the npm build
+      
+         bat "npm build"
+      }
+   }
