@@ -10,3 +10,4 @@ node {
          bat "npm build"
       }
    }
+}
